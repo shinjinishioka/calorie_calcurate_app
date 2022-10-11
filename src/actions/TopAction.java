@@ -25,7 +25,6 @@ public class TopAction extends ActionBase {
 
     public void index() throws ServletException, IOException {
         //top画面表示
-        //User user = service.findOne(request.getParameter("id"));
          User user = (User) request.getSession().getAttribute("login_user");
 
         //目標期日までの残り日数の計算
@@ -61,8 +60,8 @@ public class TopAction extends ActionBase {
         request.setAttribute("targetWeight", targetWeight);
         request.setAttribute("metabolism", metabolism);
         request.setAttribute("deadLine", deadLine);
-        request.setAttribute("user", user);
-        request.getSession().setAttribute("user", user);
+       // request.setAttribute("user", user);
+       // request.getSession().setAttribute("user", user);
         forward("topPage/index");
     }
 
