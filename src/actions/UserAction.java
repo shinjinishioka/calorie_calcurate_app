@@ -101,8 +101,6 @@ public class UserAction extends ActionBase {
     }
 
     public void edit() throws ServletException, IOException {
-        //プロフィール編集画面表示
-        //idを条件に従業員データを取得する
         User user = (User) request.getSession().getAttribute("login_user");
         // String user = request.getParameter("id");
         request.setAttribute("user", user); //取得したユーザー情報

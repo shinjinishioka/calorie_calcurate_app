@@ -3,29 +3,34 @@ package actions;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
+import models.Food;
 import models.User;
-import services.UserService;
+import services.FoodService;
 
 public class TopAction extends ActionBase {
-    private UserService service;
+    // private UserService userService;
+    private FoodService foodService;
+    private User user;
 
     @Override
     public void process() throws ServletException, IOException {
-        service = new UserService(); //追記
-
+        //   userService = new UserService(); //追記
+        foodService = new FoodService();
+        user = (User) request.getSession().getAttribute("login_user");
         //メソッドを実行
         invoke();
-
-        service.close();
+        foodService.close();
+        // userService.close();
 
     }
 
     public void index() throws ServletException, IOException {
         //top画面表示
-         User user = (User) request.getSession().getAttribute("login_user");
+       // User user = (User) request.getSession().getAttribute("login_user");
 
         //目標期日までの残り日数の計算
         LocalDate period = user.getPeriod();
@@ -57,11 +62,13 @@ public class TopAction extends ActionBase {
         //目標までの体重
         double targetWeight = user.getTargetWeight() - user.getWeight();
 
+        List<Food> foods = foodService.getAllFoodsByUser(user);
+        request.setAttribute("foods", foods);
         request.setAttribute("targetWeight", targetWeight);
         request.setAttribute("metabolism", metabolism);
         request.setAttribute("deadLine", deadLine);
-       // request.setAttribute("user", user);
-       // request.getSession().setAttribute("user", user);
+        // request.setAttribute("user", user);
+        // request.getSession().setAttribute("user", user);
         forward("topPage/index");
     }
 

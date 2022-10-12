@@ -4,6 +4,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>models.User</class>
 		<class>models.Food</class>
+		<class>models.DailyRecord</class>
+		<class>models.RecordDetail</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.user" value="causer"/>
