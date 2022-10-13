@@ -8,6 +8,8 @@
 
         <div id="sub_title">
             <h2>食事記録一覧</h2>
+            <a
+                            href="<c:url value='?action=Record&command=showDailyRecord' />">日別記録一覧</a>
         </div>
         <table id="records_list">
             <tbody>

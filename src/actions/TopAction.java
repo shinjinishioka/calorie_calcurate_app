@@ -2,27 +2,34 @@ package actions;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 
+import models.DailyRecord;
+import models.DailyTotal;
 import models.Food;
+import models.RecordDetail;
 import models.User;
 import services.FoodService;
+import services.RecordService;
 
 public class TopAction extends ActionBase {
     // private UserService userService;
     private FoodService foodService;
+    private RecordService recordService;
     private User user;
 
     @Override
     public void process() throws ServletException, IOException {
         //   userService = new UserService(); //追記
         foodService = new FoodService();
+        recordService = new RecordService();
         user = (User) request.getSession().getAttribute("login_user");
         //メソッドを実行
         invoke();
+        recordService.close();
         foodService.close();
         // userService.close();
 
@@ -30,45 +37,46 @@ public class TopAction extends ActionBase {
 
     public void index() throws ServletException, IOException {
         //top画面表示
-       // User user = (User) request.getSession().getAttribute("login_user");
-
-        //目標期日までの残り日数の計算
-        LocalDate period = user.getPeriod();
-        LocalDate today = LocalDate.now();
-        int deadLine = (int) ChronoUnit.DAYS.between(today, period);
-        //基礎代謝の計算
-        //男性：66.47＋体重×13.75＋身長×5.0－年齢×6.76＝基礎代謝量とする。
-        //女性：655.1＋体重×9.56＋身長×1.85－年齢×4.68＝基礎代謝量とする。
-        //基礎代謝量×活動レベル＝総消費カロリー
-        //活動レベル低＝1.3　中1.5　高1.8
-        double metabolism;
-        double activityLevel = 1.3;
-        if (user.getActivityLevel() == 1) {
-            activityLevel = 1.3;
-        } else if (user.getActivityLevel() == 2) {
-            activityLevel = 1.5;
-        } else if (user.getActivityLevel() == 3) {
-            activityLevel = 1.8;
-        }
-
-        if (user.getSex() == 1) {
-            metabolism = (66.47 + (user.getWeight() * 13.75) + (user.getHeight() * 5) - (user.getAge() * 6.78))
-                    * activityLevel;
-        } else {
-            metabolism = (655.1 + (user.getWeight() * 9.56) + (user.getHeight() * 1.85) - (user.getAge() * 4.68))
-                    * activityLevel;
-        }
-
+        // User user = (User) request.getSession().getAttribute("login_user");
+        //期日までの日数取得
+        int deadLine = user.deadLine();
+        //代謝計算
+        double metabolism = user.calculateMetabolism();
         //目標までの体重
         double targetWeight = user.getTargetWeight() - user.getWeight();
+        //今日の記録を取得
+        LocalDate date = LocalDate.now();
+        DailyRecord dailyRecord = recordService.findDailyRecord(user, date);
+        List<RecordDetail> recordDetails = recordService.getRecordDetailsByDailyRecordId(dailyRecord);
+        //今日のトータルを取得
+        DailyTotal dailyTotal = recordService.getDailyTotal(dailyRecord, recordDetails, foodService);
+        //推奨カロリーと推奨PFCを取得
+        double recommendCalorie = user.calculateRecommendCalorie();
+        double recommendProtein = user.recommendProtein();
+        double recommendFat = user.recommendFat();
+        double recommendCarbo = user.recommendCarbo();
 
+        //記録追加用の食品一覧取得
         List<Food> foods = foodService.getAllFoodsByUser(user);
+        //直近の記録取得
+        List<DailyRecord> dailyRecords = recordService.getDailyRecordsByUser(user);
+        List<RecordDetail> details = new ArrayList<RecordDetail>();
+        //デイリーレコードのリストのすべてのidに紐づいたレコード詳細を取得
+        for (DailyRecord dr : dailyRecords) {
+            List<RecordDetail> getDetails = recordService.getRecordDetailsByDailyRecordId(dr);
+            details.addAll(getDetails);
+        }
+
+        request.setAttribute("recordDetails", details);
+        request.setAttribute("dailyTotal", dailyTotal);
         request.setAttribute("foods", foods);
         request.setAttribute("targetWeight", targetWeight);
         request.setAttribute("metabolism", metabolism);
         request.setAttribute("deadLine", deadLine);
-        // request.setAttribute("user", user);
-        // request.getSession().setAttribute("user", user);
+        request.setAttribute("recommendCalorie", recommendCalorie);
+        request.setAttribute("recommendProtein", recommendProtein);
+        request.setAttribute("recommendCarbo", recommendCarbo);
+        request.setAttribute("recommendFat", recommendFat);
         forward("topPage/index");
     }
 

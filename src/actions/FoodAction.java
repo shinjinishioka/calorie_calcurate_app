@@ -96,6 +96,7 @@ public class FoodAction extends ActionBase {
 
     }
 
+    //削除機能
     public void delete() throws ServletException, IOException {
         service.delete(request.getParameter("id"));
         String flush = "削除しました";

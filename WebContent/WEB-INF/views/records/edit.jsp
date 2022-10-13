@@ -62,6 +62,7 @@ selected
                 糖質
                 <c:out value="${recordDetail.food.carbo  * recordDetail.amount}" />
             </p>
+            <input type="hidden" name="id" value="${recordDetail.id }">
             <button type="submit">変更</button>
         </form>
         <a
