@@ -25,10 +25,14 @@
                     </c:if>
             </div>
         </div>
+
         <!-- メッセージ表示 -->
         <c:if test="${flush != null}">
-            <c:out value="${flush}" />
+            <div id="flush_success">
+                <c:out value="${flush}" />
+            </div>
         </c:if>
+
         <c:if test="${errors != null}">
             <div id="flush_error">
                 入力内容にエラーがあります。<br />
@@ -36,7 +40,6 @@
             ・<c:out value="${error}" />
                     <br />
                 </c:forEach>
-
             </div>
         </c:if>
         <div id="content">${param.content}</div>

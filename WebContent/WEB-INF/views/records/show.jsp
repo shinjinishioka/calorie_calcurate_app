@@ -46,10 +46,10 @@
                         <td><c:out value="${recordDetail.food.name}" /></td>
                         <td><c:out value="${recordDetail.amount}" /></td>
                         <td><c:out value="${recordDetail.food.unit}" /></td>
-                        <td><c:out value="${recordDetail.food.caloriePerUnit * recordDetail.amount }" /></td>
-                        <td><c:out value="${recordDetail.food.protein  * recordDetail.amount}" /></td>
-                        <td><c:out value="${recordDetail.food.fat  * recordDetail.amount }" /></td>
-                        <td><c:out value="${recordDetail.food.carbo  * recordDetail.amount}" /></td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${recordDetail.food.caloriePerUnit * recordDetail.amount }" /></td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${recordDetail.food.protein  * recordDetail.amount}" /></td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${recordDetail.food.fat  * recordDetail.amount }" /></td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${recordDetail.food.carbo  * recordDetail.amount}" /></td>
                         <td><a
                             href="<c:url value='?action=Record&command=edit&id=${recordDetail.id }' />">編集</a>
                         </td>

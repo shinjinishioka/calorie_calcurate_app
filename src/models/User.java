@@ -117,6 +117,7 @@ public class User {
             metabolism = (655.1 + (getWeight() * 9.56) + (getHeight() * 1.85) - (getAge() * 4.68))
                     * activityLevel;
         }
+
         return metabolism;
 
     }
@@ -124,14 +125,14 @@ public class User {
     //目標までの一日の推奨カロリー計算
     public double calculateRecommendCalorie() {
         //目標までの体重
-        double targetWeight = getTargetWeight() -getWeight();
+        double targetWeight = getTargetWeight() - getWeight();
         //目標までの期日
         int deadLine = deadLine();
         //1kg増減させるのに必要なカロリー
         int calorieChangePerWeight = 7200;
         double metabolism = calculateMetabolism();
         //目標までの日数から求めた基礎代謝から増減させる摂取カロリー
-        double recommendCalorie = metabolism - (targetWeight * calorieChangePerWeight) / deadLine;
+        double recommendCalorie = metabolism + (targetWeight * calorieChangePerWeight) / deadLine;
 
         return recommendCalorie;
     }
@@ -142,6 +143,7 @@ public class User {
         double targetProtein = getTargetProtein();
         double recommendCalorie = calculateRecommendCalorie();
         double recommendProtein = (recommendCalorie * (targetProtein * 0.01)) / 4;
+
         return recommendProtein;
     }
 
@@ -151,6 +153,7 @@ public class User {
         double targetFat = getTargetFat();
         double recommendCalorie = calculateRecommendCalorie();
         double recommendFat = (recommendCalorie * (targetFat * 0.01)) / 9;
+
         return recommendFat;
     }
 
@@ -160,6 +163,7 @@ public class User {
         double targetCarbo = getTargetCarbo();
         double recommendCalorie = calculateRecommendCalorie();
         double recommendCarbo = (recommendCalorie * (targetCarbo * 0.01)) / 4;
+
         return recommendCarbo;
     }
 

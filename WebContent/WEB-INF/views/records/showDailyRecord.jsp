@@ -24,13 +24,21 @@
                     varStatus="status">
                     <tr>
                         <td><c:out value="${dailyTotal.date}" /></td>
-                        <td><c:out value="${dailyTotal.totalCalorie}" />(<c:out
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${dailyTotal.totalCalorie}" />(<fmt:formatNumber
+                                type="number" maxFractionDigits="2"
                                 value="${dailyTotal.totalCalorie - recommendCalorie}" />)</td>
-                        <td><c:out value="${dailyTotal.totalProtein}" />(<c:out
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${dailyTotal.totalProtein}" />(<fmt:formatNumber
+                                type="number" maxFractionDigits="2"
                                 value="${dailyTotal.totalProtein - recommendProtein }" />)</td>
-                        <td><c:out value="${dailyTotal.totalFat}" />(<c:out
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${dailyTotal.totalFat}" />(<fmt:formatNumber
+                                type="number" maxFractionDigits="2"
                                 value="${dailyTotal.totalFat - recommendFat}" />)</td>
-                        <td><c:out value="${dailyTotal.totalCarbo}" />(<c:out
+                        <td><fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${dailyTotal.totalCarbo}" />(<fmt:formatNumber
+                                type="number" maxFractionDigits="2"
                                 value="${dailyTotal.totalCarbo - recommendCarbo }" />)</td>
                     </tr>
                 </c:forEach>

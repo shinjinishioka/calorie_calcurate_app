@@ -38,8 +38,9 @@ public class RecordAction extends ActionBase {
         Food food = fs.findOne(request.getParameter("food"));
 
         if (errors.size() > 0) {
-            request.setAttribute("errors", errors);
-            forward("topPage/index");
+            request.getSession().setAttribute("errors", errors);
+            //request.setAttribute("errors", errors);
+            redirect("Top", "index");
         } else {
             DailyRecord dailyRecord;
             LocalDate date = LocalDate.now();
@@ -59,9 +60,9 @@ public class RecordAction extends ActionBase {
             service.createRecordDetail(recordDetail);
 
             String flush = "登録しました";
-            request.setAttribute("flush", flush);
+            request.getSession().setAttribute("flush", flush);
             fs.close();
-            forward("topPage/index");
+            redirect("Top", "index");
         }
     }
 

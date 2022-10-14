@@ -14,8 +14,7 @@ public class FoodService extends ServiceBase {
     }
 
     public List<Food> getAllFoodsByUser(User user) {
-        List<Food> foods = null;
-        foods = em.createQuery("SELECT f FROM Food f WHERE f.user = " + user.getId(), Food.class)
+        List<Food> foods = em.createQuery("SELECT f FROM Food f WHERE f.user = " + user.getId(), Food.class)
                 .getResultList();
 
         return foods;

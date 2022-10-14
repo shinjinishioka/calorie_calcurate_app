@@ -51,16 +51,21 @@ public class RecordService extends ServiceBase {
 
     //ユーザーからデイリーレコード全件取得
     public List<DailyRecord> getDailyRecordsByUser(User user) {
-        List<DailyRecord> dailyRecords = em
-                .createQuery("SELECT d FROM DailyRecord d WHERE d.user =" + user.getId(), DailyRecord.class)
-                .getResultList();
+        List<DailyRecord> dailyRecords = null;
+        try {
+            dailyRecords = em
+                    .createQuery("SELECT d FROM DailyRecord d WHERE d.user =" + user.getId()+"ORDER BY d.date DESC", DailyRecord.class)
+                    .getResultList();
+        } catch (NoResultException ex) {
+        }
+
         return dailyRecords;
     }
 
     //デイリーレコードに紐づく詳細全件を取得
     public List<RecordDetail> getRecordDetailsByDailyRecordId(DailyRecord dailyRecord) {
         List<RecordDetail> recordDetails = em
-                .createQuery("SELECT r FROM RecordDetail r WHERE r.dailyRecord =" + dailyRecord.getId(),
+                .createQuery("SELECT r FROM RecordDetail r WHERE r.dailyRecord =" + dailyRecord.getId()+"ORDER BY r.updatedAt DESC",
                         RecordDetail.class)
                 .getResultList();
         return recordDetails;
@@ -74,7 +79,7 @@ public class RecordService extends ServiceBase {
     }
 
     //レコード詳細リストから合計を取得
-    public DailyTotal getDailyTotal(DailyRecord dailyRecord, List<RecordDetail> recordDetails,FoodService fs) {
+    public DailyTotal getDailyTotal(DailyRecord dailyRecord, List<RecordDetail> recordDetails, FoodService fs) {
         DailyTotal dailyTotal = new DailyTotal();
         double totalCalorie = 0;
         double totalProtein = 0;
@@ -90,6 +95,7 @@ public class RecordService extends ServiceBase {
             totalFat = totalFat + food.getFat() * recordDetail.getAmount();
             totalCarbo = totalCarbo + food.getCarbo() * recordDetail.getAmount();
         }
+
         dailyTotal.setTotalCalorie(totalCalorie);
         dailyTotal.setTotalProtein(totalProtein);
         dailyTotal.setTotalFat(totalFat);
@@ -119,21 +125,5 @@ public class RecordService extends ServiceBase {
         em.remove(recordDetail);
         em.getTransaction().commit();
     }
-
-    /*
-    public DailyRecord findOne(String id) {
-        DailyRecord dailyRecord = em.createQuery("SELECT d FROM DailyRecord d WHERE d.id =" + id, DailyRecord.class)
-                .getSingleResult();
-        return dailyRecord;
-    }
-
-
-    public void delete(String id) {
-        DailyRecord dailyRecord = findOne(id);
-        em.getTransaction().begin();
-        em.remove(dailyRecord);
-        em.getTransaction().commit();
-    }
-        */
 
 }

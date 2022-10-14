@@ -23,7 +23,7 @@ public class TopAction extends ActionBase {
 
     @Override
     public void process() throws ServletException, IOException {
-        //   userService = new UserService(); //追記
+
         foodService = new FoodService();
         recordService = new RecordService();
         user = (User) request.getSession().getAttribute("login_user");
@@ -31,25 +31,37 @@ public class TopAction extends ActionBase {
         invoke();
         recordService.close();
         foodService.close();
-        // userService.close();
 
     }
 
+    //top画面表示
+    @SuppressWarnings("unchecked")
     public void index() throws ServletException, IOException {
-        //top画面表示
-        // User user = (User) request.getSession().getAttribute("login_user");
+
         //期日までの日数取得
         int deadLine = user.deadLine();
         //代謝計算
         double metabolism = user.calculateMetabolism();
         //目標までの体重
         double targetWeight = user.getTargetWeight() - user.getWeight();
-        //今日の記録を取得
-        LocalDate date = LocalDate.now();
-        DailyRecord dailyRecord = recordService.findDailyRecord(user, date);
-        List<RecordDetail> recordDetails = recordService.getRecordDetailsByDailyRecordId(dailyRecord);
+
         //今日のトータルを取得
-        DailyTotal dailyTotal = recordService.getDailyTotal(dailyRecord, recordDetails, foodService);
+        LocalDate date = LocalDate.now();
+        DailyTotal dailyTotal = new DailyTotal();
+        DailyRecord dailyRecord = recordService.findDailyRecord(user, date);
+        if (dailyRecord != null) {
+            List<RecordDetail> recordDetails = recordService.getRecordDetailsByDailyRecordId(dailyRecord);
+            dailyTotal = recordService.getDailyTotal(dailyRecord, recordDetails, foodService);
+
+        } else {
+            dailyTotal.setDate(null);
+            dailyTotal.setTotalCalorie(0.0);
+            dailyTotal.setTotalProtein(0.0);
+            dailyTotal.setTotalFat(0.0);
+            dailyTotal.setTotalCarbo(0.0);
+        }
+        request.setAttribute("dailyTotal", dailyTotal);
+
         //推奨カロリーと推奨PFCを取得
         double recommendCalorie = user.calculateRecommendCalorie();
         double recommendProtein = user.recommendProtein();
@@ -58,17 +70,39 @@ public class TopAction extends ActionBase {
 
         //記録追加用の食品一覧取得
         List<Food> foods = foodService.getAllFoodsByUser(user);
-        //直近の記録取得
-        List<DailyRecord> dailyRecords = recordService.getDailyRecordsByUser(user);
-        List<RecordDetail> details = new ArrayList<RecordDetail>();
-        //デイリーレコードのリストのすべてのidに紐づいたレコード詳細を取得
-        for (DailyRecord dr : dailyRecords) {
-            List<RecordDetail> getDetails = recordService.getRecordDetailsByDailyRecordId(dr);
-            details.addAll(getDetails);
+
+        if (foods.size() == 0) {
+            foods = null;
         }
 
-        request.setAttribute("recordDetails", details);
-        request.setAttribute("dailyTotal", dailyTotal);
+        //直近の記録取得
+        List<DailyRecord> dailyRecords = recordService.getDailyRecordsByUser(user);
+        if (dailyRecords != null) {
+            List<RecordDetail> recentlyRecords = new ArrayList<RecordDetail>();
+            //デイリーレコードのリストのすべてのidに紐づいたレコード詳細を取得
+            for (DailyRecord dr : dailyRecords) {
+                List<RecordDetail> getDetails = recordService.getRecordDetailsByDailyRecordId(dr);
+                recentlyRecords.addAll(getDetails);
+            }
+            //直近の3件のみ表示させる
+            request.setAttribute("recordDetails", recentlyRecords.subList(0, 3));
+        }
+
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = (String) request.getSession().getAttribute("flush");
+        if (flush != null) {
+            request.setAttribute("flush", flush);
+            request.getSession().removeAttribute("flush");
+        }
+        //セッションにエラーメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+
+        List<String> errors = new ArrayList<String>();
+        errors = (List<String>) request.getSession().getAttribute("errors");
+        if (errors != null) {
+            request.setAttribute("errors", errors);
+            request.getSession().removeAttribute("errors");
+        }
+
         request.setAttribute("foods", foods);
         request.setAttribute("targetWeight", targetWeight);
         request.setAttribute("metabolism", metabolism);
