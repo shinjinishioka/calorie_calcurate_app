@@ -23,10 +23,18 @@ public class RecordValidator {
         if (amount.equals("") || amount == null) {
             errors.add(amountError);
         }
+        //数値かどうかのチェック
+        String numberError = "半角数字数字で入力してください";
+        try {
+            Double.parseDouble(amount);
+        } catch (NumberFormatException e) {
+            errors.add(numberError);
+        }
 
         return errors;
     }
-    public static List<String> validate(String mealTime, String food, String amount,String date) {
+
+    public static List<String> validate(String mealTime, String food, String amount, String date) {
         List<String> errors = new ArrayList<String>();
 
         //食事時間のチェック
@@ -50,7 +58,13 @@ public class RecordValidator {
         if (date.equals("") || date == null) {
             errors.add(dateError);
         }
-
+        //数値かどうかのチェック
+        String numberError = "半角数字数字で入力してください";
+        try {
+            Double.parseDouble(amount);
+        } catch (NumberFormatException e) {
+            errors.add(numberError);
+        }
         return errors;
     }
 

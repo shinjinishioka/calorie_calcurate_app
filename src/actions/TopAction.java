@@ -77,7 +77,7 @@ public class TopAction extends ActionBase {
 
         //直近の記録取得
         List<DailyRecord> dailyRecords = recordService.getDailyRecordsByUser(user);
-        if (dailyRecords != null) {
+        if (dailyRecords.size() != 0) {
             List<RecordDetail> recentlyRecords = new ArrayList<RecordDetail>();
             //デイリーレコードのリストのすべてのidに紐づいたレコード詳細を取得
             for (DailyRecord dr : dailyRecords) {
@@ -85,7 +85,11 @@ public class TopAction extends ActionBase {
                 recentlyRecords.addAll(getDetails);
             }
             //直近の3件のみ表示させる
-            request.setAttribute("recordDetails", recentlyRecords.subList(0, 3));
+            if (recentlyRecords.size() > 3) {
+                request.setAttribute("recordDetails", recentlyRecords.subList(0, 3));
+            } else {
+                request.setAttribute("recordDetails", recentlyRecords);
+            }
         }
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する

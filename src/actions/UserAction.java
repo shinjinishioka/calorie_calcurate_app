@@ -30,7 +30,7 @@ public class UserAction extends ActionBase {
         //登録内容のバリデーションを行う
         List<String> errors = UserValidator.validate(request.getParameter("name"), request.getParameter("age"),
                 request.getParameter("height"),
-                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),
+                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),request.getParameter("period"),
                 request.getParameter("targetProtein"), request.getParameter("targetFat"),
                 request.getParameter("targetCarbo"), request.getParameter("password"));
         //パスワード再入力チェック
@@ -80,7 +80,6 @@ public class UserAction extends ActionBase {
         }
         request.setAttribute("sex", sex); //取得した性別
         request.setAttribute("activityLevel", activityLevel); //取得した活動レベル
-        // request.setAttribute("user", user); //取得したユーザー情報
 
         //詳細画面を表示
         forward("users/profile");
@@ -133,7 +132,7 @@ public class UserAction extends ActionBase {
         //登録内容のバリデーションを行う
         List<String> errors = UserValidator.validate(request.getParameter("name"), request.getParameter("age"),
                 request.getParameter("height"),
-                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),
+                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),request.getParameter("period"),
                 request.getParameter("targetProtein"), request.getParameter("targetFat"),
                 request.getParameter("targetCarbo"), request.getParameter("password"));
 

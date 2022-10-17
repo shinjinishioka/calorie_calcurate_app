@@ -40,6 +40,18 @@ public class FoodValidator {
             errors.add(carboError);
         }
 
+        //数値かどうかのチェック
+        String numberError = "半角数字数字で入力してください";
+        try {
+            Double.parseDouble(caloriePerUnit);
+            Double.parseDouble(protein);
+            Double.parseDouble(fat);
+            Double.parseDouble(carbo);
+
+        } catch (NumberFormatException e) {
+            errors.add(numberError);
+        }
+
         return errors;
     }
 

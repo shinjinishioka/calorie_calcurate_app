@@ -25,7 +25,7 @@ selected
             </select></label> <br /> <label>身長<br /> <input type="text" name="height"
                 value="${login_user.height}" /></label> <br /> <label>体重<br /> <input
                 type="text" name="weight" value="${login_user.weight}" /></label> <br /> <label>体脂肪<br />
-                <input type="text" name="bodyFat" value="${user.bodyFat}" /></label><br />
+                <input type="text" name="bodyFat" value="${login_user.bodyFat}" /></label><br />
             <label>目標体重<br /> <input type="text" name="targetWeight"
                 value="${login_user.targetWeight}" /></label><br /> <label>活動レベル<br />
                 <select name="activityLevel" size="1">
