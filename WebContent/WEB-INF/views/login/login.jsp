@@ -6,21 +6,6 @@
 <c:import url="../layout/app.jsp">
 
     <c:param name="content">
-        <c:if test="${errors != null}">
-            <div id="flush_error">
-                入力内容にエラーがあります。<br />
-                <c:forEach var="error" items="${errors}">
-            ・<c:out value="${error}" />
-                    <br />
-                </c:forEach>
-        <c:if test="${flush != null}">
-            <div id="flush_success">
-                <c:out value="${flush}"></c:out>
-            </div>
-        </c:if>
-
-            </div>
-        </c:if>
         <h2>ログイン</h2>
         <!--　-->
         <form method="POST"
@@ -30,6 +15,7 @@
             <br />  <br />
             <button type="submit">ログイン</button>
         </form>
+        <br/>
         <a href="<c:url value='?action=User&command=entryNew' />">新規登録</a>
     </c:param>
 </c:import>

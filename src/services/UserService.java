@@ -57,6 +57,7 @@ public class UserService extends ServiceBase {
         savedUser.setTargetWeight(user.getTargetWeight());
         savedUser.setTargetProtein(user.getTargetProtein());
         savedUser.setTargetFat(user.getTargetFat());
+        savedUser.setTargetCarbo(user.getTargetCarbo());
         savedUser.setUpdatedAt(LocalDateTime.now());
 
         em.getTransaction().begin();

@@ -55,8 +55,17 @@ public class FoodAction extends ActionBase {
 
     //一覧表示
     public void show() throws ServletException, IOException {
-        List<Food> foods = service.getAllFoodsByUser(user);
-        // Food food = service.findOne("1");
+        List<Food> foodsCount = service.getAllFoodsByUser(user);
+        //ページネーション用
+        int count = foodsCount.size();
+        int page = 1;
+        if(request.getParameter("page") != null ) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        List<Food> foods = service.getAllFoodsByUserPerPage(user,page);
+
+        request.setAttribute("count", count);
         request.setAttribute("foods", foods);
         forward("foods/show");
     }

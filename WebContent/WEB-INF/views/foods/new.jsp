@@ -7,7 +7,7 @@
 
     <c:param name="content">
 
-        <h2>食品登録</h2>
+        <h2 id="sub">食品登録</h2>
         <!--　-->
         <form method="POST"
             action="<c:url value='?action=Food&command=create' />">
@@ -19,5 +19,7 @@
                 <input type="text" name="carbo" value="0" /></label><br /> <br /> <br />
             <button type="submit">登録</button>
         </form>
+        <br />
+         <a href="<c:url value='?action=Food&command=show' />">戻る</a>
     </c:param>
 </c:import>

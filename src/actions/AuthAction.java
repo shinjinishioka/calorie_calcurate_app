@@ -48,10 +48,9 @@ public class AuthAction extends ActionBase {
                 request.getSession().setAttribute("login_user", user);
                 //ログイン完了のフラッシュメッセージを設定
                 String flush = "ログインしました";
-                request.setAttribute("flush", flush);
+                request.getSession().setAttribute("flush", flush);
                 //トップページへ
                 redirect("Top","index");
-               // forward("topPage/index");
             } else {
                 //失敗の場合
                 errors.add("ログインに失敗しました");

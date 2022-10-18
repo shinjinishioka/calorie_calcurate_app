@@ -30,7 +30,8 @@ public class UserAction extends ActionBase {
         //登録内容のバリデーションを行う
         List<String> errors = UserValidator.validate(request.getParameter("name"), request.getParameter("age"),
                 request.getParameter("height"),
-                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),request.getParameter("period"),
+                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),
+                request.getParameter("period"),
                 request.getParameter("targetProtein"), request.getParameter("targetFat"),
                 request.getParameter("targetCarbo"), request.getParameter("password"));
         //パスワード再入力チェック
@@ -132,7 +133,8 @@ public class UserAction extends ActionBase {
         //登録内容のバリデーションを行う
         List<String> errors = UserValidator.validate(request.getParameter("name"), request.getParameter("age"),
                 request.getParameter("height"),
-                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),request.getParameter("period"),
+                request.getParameter("weight"), request.getParameter("bodyFat"), request.getParameter("targetWeight"),
+                request.getParameter("period"),
                 request.getParameter("targetProtein"), request.getParameter("targetFat"),
                 request.getParameter("targetCarbo"), request.getParameter("password"));
 
@@ -154,7 +156,7 @@ public class UserAction extends ActionBase {
                     Double.parseDouble(request.getParameter("targetCarbo")), null, null,
                     request.getParameter("password"),
                     null);
-
+            System.out.println("か０ぼの確認" + request.getParameter("targetCarbo"));
             service.update(user);
             user = service.findOne(user.getId().toString());
             request.getSession().setAttribute("login_user", user);
@@ -164,7 +166,5 @@ public class UserAction extends ActionBase {
         }
 
     }
-
-
 
 }

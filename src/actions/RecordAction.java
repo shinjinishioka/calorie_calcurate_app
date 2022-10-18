@@ -76,6 +76,22 @@ public class RecordAction extends ActionBase {
             List<RecordDetail> getDetails = service.getRecordDetailsByDailyRecordId(dailyRecord);
             recordDetails.addAll(getDetails);
         }
+        int count = recordDetails.size();
+        //ページネーション用
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+        if (count >= 15) {
+            int pageStart = (page - 1) * 15;
+            int pageEnd = pageStart + 15;
+            if (pageEnd > count) {
+                pageEnd = count;
+            }
+            recordDetails = recordDetails.subList(pageStart, pageEnd);
+        }
+
+        request.setAttribute("count", count);
         request.setAttribute("recordDetails", recordDetails);
 
         forward("records/show");
@@ -96,6 +112,20 @@ public class RecordAction extends ActionBase {
             dailyTotals.add(dailyTotal);
 
         }
+        int count = dailyTotals.size();
+        //ページネーション用
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+        if (count >= 15) {
+            int pageStart = (page - 1) * 15;
+            int pageEnd = pageStart + 15;
+            if (pageEnd > count) {
+                pageEnd = count;
+            }
+            dailyTotals = dailyTotals.subList(pageStart, pageEnd);
+        }
 
         //一日推奨カロリーPFCを取得
 
@@ -104,6 +134,7 @@ public class RecordAction extends ActionBase {
         double recommendFat = user.recommendFat();
         double recommendCarbo = user.recommendCarbo();
 
+        request.setAttribute("count", count);
         request.setAttribute("recommendCalorie", recommendCalorie);
         request.setAttribute("recommendProtein", recommendProtein);
         request.setAttribute("recommendCarbo", recommendCarbo);

@@ -67,5 +67,7 @@ selected
         </form>
         <a
             href="<c:url value='?action=Record&command=delete&id=${recordDetail.id }' />">削除する</a>
+                            <br /> <br />
+         <a href="<c:url value='?action=User&command=show' />">戻る</a>
     </c:param>
 </c:import>

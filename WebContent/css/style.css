@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+body {
+    color: #333333;
+    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
+        Arial, sans-serif;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(0, 128, 64);
+}
+
+#content {
+    width: 94%;
+    margin-top: 15px;
+    padding-left: 3%;
+}
+
+h1 {
+    font-size: 24px;
+    display: inline;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #24738e;
+}
+
+table, tr, th, td {
+    border: 1px solid #cccccc;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th {
+    width: 26%;
+    padding: 10px 2%;
+}
+
+td {
+    width: 66%;
+    padding: 10px 2%;
+}
+
+button {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+#footer {
+    text-align: center;
+}
+
+#flush_success {
+    width: 100%;
+    padding-top: 28px;
+    padding-left: 2%;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+    color: #155724;
+    background-color: #d4edda;
+}
+
+#flush_error {
+    width: 100%;
+    padding-top: 28px;
+    padding-left: 2%;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+#sub_title {
+    display: flex;
+    margin-bottom: 50px;
+}
+
+#sub {
+    font-size: 30px;
+    margin-top: auto;
+    margin-right: 35px;
+}
+
+.sub_menu {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 20px;
+}
+
+.sub_menu p {
+    margin-bottom: 0px;
+}
+#main_content{
+   margin-left: 20%;
+}
+#main_content button{
+    margin-left:100px;
+}
+#top_content {
+    display: flex;
+    margin: 20px;
+}
+
+#show_record {
+    margin: 30px;
+}
+
+#record_add {
+    margin-left: 100px;
+}
+
+#add {
+    display: flex;
+}
+
+#recent_record {
+    margin-left: 20px;
+}
+
+tr.row1 {
+    background-color: #f2f2f2;
+}
+
+tr.row0 {
+    background-color: #ffffff;
+}
+
+select {
+    height: 30px;
+}
+
+#header_menu {
+    width: 57%;
+    padding-top: 17px;
+    padding-left: 3%;
+    display: inline-block;
+}
+
+#header a {
+    color: #eeeeee;
+}
+
+#today_total {
+    width: 300px;
+}
+
+#add_button {
+    padding-top: 60px;
+}
+
+.add_form {
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.add_form select {
+    height: 30px;
+}
+
+.add_form input {
+    height: 26px;
+}
+
+h1 a {
+    color: #eeeeee;
+}
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
+        Arial, sans-serif;
+}
+
+h3 {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.indexContainer {
+    display: flex;
+}

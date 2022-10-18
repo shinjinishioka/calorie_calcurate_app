@@ -7,19 +7,25 @@
     <c:param name="content">
 
         <div id="sub_title">
-            <h2>プロフィール情報</h2>
-            <a href="<c:url value='?action=User&command=edit' />">編集する</a> <a
-                href="<c:url value='?action=User&command=changePass' />">パスワード変更</a>
-
-            <a href="<c:url value='?action=User&command=delete' />"onclick=" return deleteCheck();">退会する</a>
+            <h2 id="sub">プロフィール情報</h2>
+            <div class="sub_menu">
+                <a href="<c:url value='?action=User&command=edit' />">編集する</a>
+            </div>
+            <div class="sub_menu">
+                <a href="<c:url value='?action=User&command=changePass' />">パスワード変更</a>
+            </div>
+            <div class="sub_menu">
+                <a href="<c:url value='?action=User&command=delete' />"
+                    onclick=" return deleteCheck();">退会する</a>
+            </div>
             <script>
                 function deleteCheck() {
                     var checked = confirm("退会するとログインできなくなりますがよろしいですか？")
-                        if (checked == true) {
-                            return true;
-                        } else {
-                            return false;
-                        }
+                    if (checked == true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             </script>
 
@@ -92,6 +98,8 @@
             <c:out value="${login_user.targetCarbo}" />
             %
         </p>
+        <br />
+        <a href="<c:url value='?action=Top&command=index' />">TOPに戻る</a>
 
     </c:param>
 </c:import>

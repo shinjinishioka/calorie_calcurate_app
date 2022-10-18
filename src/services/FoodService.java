@@ -20,6 +20,15 @@ public class FoodService extends ServiceBase {
         return foods;
     }
 
+    public List<Food> getAllFoodsByUserPerPage(User user,int page) {
+        List<Food> foods = em.createQuery("SELECT f FROM Food f WHERE f.user = " + user.getId(), Food.class)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        return foods;
+    }
+
     public Food findOne(String id) {
         Food food = em.createQuery("SELECT f FROM Food f WHERE f.id =" + id, Food.class)
                 .getSingleResult();
