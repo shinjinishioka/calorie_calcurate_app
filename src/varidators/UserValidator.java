@@ -46,10 +46,17 @@ public class UserValidator {
         if (period.equals("") || period == null) {
             errors.add(periodError);
         } else {
-            if (LocalDate.parse(period).isBefore(today)) {
-                periodError = "本日以降の日付を選択してください";
-                errors.add(periodError);
+            String formatError = "日付をyyyy-mm-ddの形式で入力してください";
+             period = period.replace("/", "-");
+            try {
+                if (LocalDate.parse(period).isBefore(today)) {
+                    periodError = "本日以降の日付を選択してください";
+                    errors.add(periodError);
+                }
+            } catch (Exception e) {
+                errors.add(formatError);
             }
+
         }
         //タンパク質割合のチェック
         String targetProteinError = "タンパク質割合を入力してください";
