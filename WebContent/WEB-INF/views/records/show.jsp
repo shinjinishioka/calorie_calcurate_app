@@ -8,9 +8,9 @@
     <c:param name="content">
 
         <div id="sub_title">
-            <h2 id="sub">食事記録一覧</h2>
+            <h2>食事記録一覧</h2>
             <div class="sub_menu">
-            <a href="<c:url value='?action=Record&command=showDailyRecord' />">日別記録一覧</a>
+            <a href="<c:url value='?action=Record&command=showDailyRecord' />">▶　日別記録一覧</a>
             </div>
         </div>
         <table>

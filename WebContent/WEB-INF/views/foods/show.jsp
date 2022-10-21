@@ -7,9 +7,10 @@
     <c:param name="content">
 
         <div id="sub_title">
-            <h2 id="sub">登録済み食品一覧</h2>
+            <h2>登録済み食品一覧</h2>
             <div class="sub_menu">
-                <a href="<c:url value='?action=Food&command=entryNew' />">食品の登録</a>
+                <a href="<c:url value='?action=Food&command=entryNew' />">▶
+                    食品の登録</a>
             </div>
         </div>
         <table id="foods_list">
@@ -31,9 +32,14 @@
                         <td><c:out value="${food.protein}" />g</td>
                         <td><c:out value="${food.fat}" />g</td>
                         <td><c:out value="${food.carbo}" />g</td>
-                        <td><a
-                            href="<c:url value='?action=Food&command=edit&id=${food.id }' />">編集</a>
-                        </td>
+                        <c:choose>
+                            <c:when test="${food.user.id == sessionScope.login_user.id}">
+                                <td><a
+                                    href="<c:url value='?action=Food&command=edit&id=${food.id }' />">編集</a>
+
+                            </c:when>
+                            <c:otherwise><td></td></c:otherwise>
+                        </c:choose>
                     </tr>
                 </c:forEach>
             </tbody>

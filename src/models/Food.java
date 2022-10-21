@@ -56,5 +56,8 @@ public class Food {
     @Column(name = "carbo", nullable = false)
     private Double carbo;
 
+    //論理削除
+    @Column(name = "delete_flag", nullable = false)
+    private Integer deleteFlag;
 
 }

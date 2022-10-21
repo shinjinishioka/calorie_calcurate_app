@@ -7,7 +7,7 @@
 
     <c:param name="content">
 
-        <h2 id="sub">食品の編集</h2>
+        <h2>食品の編集</h2>
         <!--　-->
         <form method="POST"
             action="<c:url value='?action=Food&command=update' />">

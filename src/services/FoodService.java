@@ -14,18 +14,19 @@ public class FoodService extends ServiceBase {
     }
 
     public List<Food> getAllFoodsByUser(User user) {
-        List<Food> foods = em.createQuery("SELECT f FROM Food f WHERE f.user = " + user.getId(), Food.class)
+        List<Food> foods = em.createQuery("SELECT f FROM Food f  WHERE f.deleteFlag =0 AND f.user =" + user.getId()+"OR f.deleteFlag =0 AND f.user=1 ORDER BY f.id DESC", Food.class)
                 .getResultList();
 
         return foods;
     }
 
-    public List<Food> getAllFoodsByUserPerPage(User user,int page) {
-        List<Food> foods = em.createQuery("SELECT f FROM Food f WHERE f.user = " + user.getId(), Food.class)
+    public List<Food> getAllFoodsByUserPerPage(User user, int page) {
+        List<Food> foods = em
+                .createQuery("SELECT f FROM Food f WHERE f.deleteFlag =0 AND f.user = " + user.getId() + "OR f.deleteFlag =0 AND f.user=1 ORDER BY f.id DESC",
+                        Food.class)
                 .setFirstResult(15 * (page - 1))
                 .setMaxResults(15)
                 .getResultList();
-
         return foods;
     }
 
@@ -48,10 +49,18 @@ public class FoodService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+    /*
     public void delete(String id) {
         Food food = findOne(id);
         em.getTransaction().begin();
         em.remove(food);
+        em.getTransaction().commit();
+    }
+    */
+    public void delete(String id) {
+        Food food = findOne(id);
+        food.setDeleteFlag(1);
+        em.getTransaction().begin();
         em.getTransaction().commit();
     }
 

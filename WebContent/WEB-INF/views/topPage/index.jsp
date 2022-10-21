@@ -7,7 +7,7 @@
     <c:param name="content">
         <div id="top">
             <div id="sub_title">
-                <h2 id="sub">
+                <h2>
                     <c:out value="${login_user.name }" />
                     さん、こんにちは
                 </h2>
@@ -36,9 +36,7 @@
                     kg
                 </div>
                 <div class="sub_menu">
-                    あと
-                    <c:out value="${deadLine}" />
-                    日
+                   <p>あと<c:out value="${deadLine}" />日</p>
                 </div>
             </div>
             <div id="top_content">
@@ -102,15 +100,15 @@
                                     <select name="food">
                                         <c:forEach var="food" items="${foods}">
                                             <option value="${food.id}"><c:out
-                                                    value="${food.name}" /> (<c:out value="${food.unit}"/>)
+                                                    value="${food.name}" />（<c:out value="${food.unit}" />）
                                             </option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="add_form">
                                     <p>数量</p>
-                                    <label><input type="text" name="amount" value="0"
-                                        size="2" /></label>
+                                    <label><input type="text" name="amount" value="1"
+                                        size="4" /></label>
                                 </div>
                                 <div id="add_button">
                                     <button type="submit">記録追加</button>
@@ -120,48 +118,39 @@
                     </c:choose>
                 </div>
             </div>
-            <div id="show_record">
-                <h3>
-                    <a href="<c:url value='?action=Record&command=show' />">食事記録一覧を見る</a>
-                </h3>
-            </div>
+
             <div id="recent_record">
                 <h3>直近の記録</h3>
                 <c:forEach var="recordDetail" items="${recordDetails}">
                     <fmt:parseDate value="${recordDetail.dailyRecord.date}"
                         pattern="yyyy-MM-dd" var="day" type="date" />
-                    <p>
-                        <fmt:formatDate value='${day}' pattern='MM/dd' />
-                        <c:choose>
-                            <c:when test="${recordDetail.mealTime == '1' }">
+                    <ul>
+                        <li><fmt:formatDate value='${day}' pattern='MM/dd' /> <c:choose>
+                                <c:when test="${recordDetail.mealTime == '1' }">
                                 朝食
                             </c:when>
-                            <c:when test="${recordDetail.mealTime == '2' }">
+                                <c:when test="${recordDetail.mealTime == '2' }">
                                 昼食
                             </c:when>
-                            <c:when test="${recordDetail.mealTime == '3' }">
+                                <c:when test="${recordDetail.mealTime == '3' }">
                                 夕食
                             </c:when>
-                            <c:when test="${recordDetail.mealTime == '4' }">
+                                <c:when test="${recordDetail.mealTime == '4' }">
                                間食
                             </c:when>
-                        </c:choose>
-                        <c:out value="${recordDetail.food.name}" />
-                        <c:out value="${recordDetail.amount}" />
-                        <c:out value="${recordDetail.food.unit}" />
-                        <fmt:formatNumber type="number" maxFractionDigits="2"
-                            value="${recordDetail.food.caloriePerUnit * recordDetail.amount }" />
-                        kcal タンパク質
-                        <fmt:formatNumber type="number" maxFractionDigits="2"
-                            value="${recordDetail.food.protein  * recordDetail.amount}" />
-                        ｇ 脂質
-                        <fmt:formatNumber type="number" maxFractionDigits="2"
-                            value="${recordDetail.food.fat  * recordDetail.amount }" />
-                        ｇ 糖質
-                        <fmt:formatNumber type="number" maxFractionDigits="2"
-                            value="${recordDetail.food.carbo  * recordDetail.amount}" />
-                        ｇ
-                    </p>
+                            </c:choose> <c:out value="${recordDetail.food.name}" /> <c:out
+                                value="${recordDetail.amount}" /> <c:out
+                                value="${recordDetail.food.unit}" /> <fmt:formatNumber
+                                type="number" maxFractionDigits="2"
+                                value="${recordDetail.food.caloriePerUnit * recordDetail.amount }" />
+                            kcal タンパク質 <fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${recordDetail.food.protein  * recordDetail.amount}" />
+                            ｇ 脂質 <fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${recordDetail.food.fat  * recordDetail.amount }" /> ｇ
+                            糖質 <fmt:formatNumber type="number" maxFractionDigits="2"
+                                value="${recordDetail.food.carbo  * recordDetail.amount}" /> ｇ
+                        </li>
+                    </ul>
                 </c:forEach>
             </div>
         </div>

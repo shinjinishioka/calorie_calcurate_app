@@ -7,7 +7,7 @@
 
     <c:param name="content">
 
-        <h2 id="sub">食品登録</h2>
+        <h2>食品登録</h2><br/>
         <!--　-->
         <form method="POST"
             action="<c:url value='?action=Food&command=create' />">

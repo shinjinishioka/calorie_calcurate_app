@@ -9,6 +9,7 @@
 
         <h2>パスワード変更画面</h2>
         <!--　-->
+        <br/><br/>
         <form method="POST"
             action="<c:url value='?action=User&command=updatePass' />">
             <label>現在のパスワード<br /> <input type="password"

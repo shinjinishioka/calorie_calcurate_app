@@ -64,6 +64,7 @@ public class UserService extends ServiceBase {
         em.getTransaction().commit();
     }
 
+
     public void changePass(String id, String password) {
         User savedUser = findOne(id);
         savedUser.setPassword(password);

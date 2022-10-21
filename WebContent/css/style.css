@@ -1,30 +1,43 @@
 @charset "UTF-8";
 
 body {
-    color: #333333;
-    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
-        Arial, sans-serif;
+    font-family: Century Gothic;
+    color: #283FB9;
 }
 
 #header {
     width: 100%;
     height: 70px;
-    background-color: rgb(0, 128, 64);
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #6179E4;
+}
+
+#header a {
+    color: #FFF;
 }
 
 #content {
-    width: 94%;
+
     margin-top: 15px;
     padding-left: 3%;
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     display: inline;
+    font-weight: bold;
+    color: #FFF;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 0.35em;
+    border-bottom: 2px solid #6179E4;
+    display: inline-block;
+    margin-right: 40px;
 }
 
 li {
@@ -38,32 +51,126 @@ p {
 }
 
 a {
+    position: relative;
+    border: 1px solid transparent;
+    padding: 0.1em 0.3em;
+    display: inline-block;
+    transition: .3s;
     text-decoration: none;
-    color: #24738e;
+    color: #6179E4;
 }
 
-table, tr, th, td {
-    border: 1px solid #cccccc;
+a::before, a::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 1px;
+    background-color: #6179E4;
+    transition: .3s;
+}
+
+.header_menu a::before, .header_menu a::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 1px;
+    background-color: #FFF;
+    transition: .3s;
+}
+
+a::before {
+    top: 0;
+    left: 0;
+}
+
+a::after {
+    bottom: 0;
+    right: 0;
+}
+
+a:hover::before, a:hover::after {
+    width: 100%;
 }
 
 table {
+    border-collapse: collapse;
+    border-spacing: 5px;
+    margin: 0 auto;
+    padding: 0;
     width: 100%;
-    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-th {
-    width: 26%;
-    padding: 10px 2%;
+table th, table td {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
 }
 
-td {
-    width: 66%;
-    padding: 10px 2%;
+table th {
+    padding: 15px 0;
+    font-size: 14px;
+    text-align: center;
+}
+
+table tr {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+tbody:hover tr:hover td, tbody:hover tr:hover th, tbody:hover tr:hover td a
+    {
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+    background: rgba(97, 121, 228, 1);
 }
 
 button {
-    font-size: 14px;
-    padding: 5px 10px;
+    display: inline-block;
+    padding: 0.4em 1.6em;
+    font-size: 0.8em;
+    color: #6179E4;
+    text-decoration: none;
+    user-select: none;
+    border: 1px #6179E4 solid;
+    border-radius: 100px;
+    transition: 0.4s ease;
+}
+
+button:hover {
+    color: #fff;
+    background: #6179E4;
+}
+
+input {
+    box-sizing: border-box;
+    height: 27px;
+    margin: 4px 0;
+    font-size: 16px;
+    color: #6179E4;
+    border: 0;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    border-left: none;
+    outline: 0;
+    transition: 0.3s;
+    -webkit-appearance: none;
+}
+
+input:focus {
+    border: 1px solid #283FB9;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+select {
+    color: #283FB9;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
 }
 
 #footer {
@@ -76,8 +183,8 @@ button {
     padding-left: 2%;
     padding-bottom: 28px;
     margin-bottom: 15px;
-    color: #155724;
-    background-color: #d4edda;
+    color: #283FB9;
+    background-color: rgba(97, 121, 228, 0.3);
 }
 
 #flush_error {
@@ -90,15 +197,19 @@ button {
     background-color: #f8d7da;
 }
 
+.header_menu {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 20px;
+}
+
+.header_menu p {
+    margin-bottom: 0px;
+}
+
 #sub_title {
     display: flex;
     margin-bottom: 50px;
-}
-
-#sub {
-    font-size: 30px;
-    margin-top: auto;
-    margin-right: 35px;
 }
 
 .sub_menu {
@@ -110,12 +221,7 @@ button {
 .sub_menu p {
     margin-bottom: 0px;
 }
-#main_content{
-   margin-left: 20%;
-}
-#main_content button{
-    margin-left:100px;
-}
+
 #top_content {
     display: flex;
     margin: 20px;
@@ -126,7 +232,8 @@ button {
 }
 
 #record_add {
-    margin-left: 100px;
+    margin-left: 10px;
+    width: 65%;
 }
 
 #add {
@@ -135,33 +242,15 @@ button {
 
 #recent_record {
     margin-left: 20px;
-}
-
-tr.row1 {
-    background-color: #f2f2f2;
-}
-
-tr.row0 {
-    background-color: #ffffff;
+    margin-bottom: 20px;
 }
 
 select {
     height: 30px;
 }
 
-#header_menu {
-    width: 57%;
-    padding-top: 17px;
-    padding-left: 3%;
-    display: inline-block;
-}
-
-#header a {
-    color: #eeeeee;
-}
-
 #today_total {
-    width: 300px;
+    width: 35%;
 }
 
 #add_button {
@@ -171,7 +260,6 @@ select {
 .add_form {
     margin: 10px;
     text-align: center;
-    width: 200px;
 }
 
 .add_form select {
@@ -182,20 +270,7 @@ select {
     height: 26px;
 }
 
-h1 a {
-    color: #eeeeee;
-}
-
-pre {
-    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
-        Arial, sans-serif;
-}
-
 h3 {
     font-size: larger;
     font-weight: bold;
-}
-
-.indexContainer {
-    display: flex;
 }

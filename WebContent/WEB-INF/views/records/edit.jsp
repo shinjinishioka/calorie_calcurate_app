@@ -43,8 +43,8 @@ selected
                         <c:out value="${food.unit}" />）
                     </option>
                 </c:forEach>
-            </select> <label>数量<br /> <input type="text" name="amount"
-                value="${recordDetail.amount}" /></label>
+            </select> <br/><br/><label>数量 &nbsp;<input type="text" name="amount"
+                value="${recordDetail.amount}" size="4" /></label>
             <p>
                 カロリー
                 <c:out

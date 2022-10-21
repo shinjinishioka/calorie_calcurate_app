@@ -9,7 +9,7 @@
         <div id="sub_title">
             <h2>日別記録一覧</h2>
         </div>
-        <p>【】目標差</p>
+        <p>　　【】目標差</p>
         <table id="records_list">
             <tbody>
                 <tr>

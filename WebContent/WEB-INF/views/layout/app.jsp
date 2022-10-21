@@ -12,21 +12,29 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <div id="header_menu">
+            <div id="sub_title">
                 <h1>
                     <a href="<c:url value='?action=Top&command=index' />">
                         カロリー計算アプリ</a>
                 </h1>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
-                    <a href="<c:url value='?action=User&command=show' />">プロフィール</a>&nbsp;
-                         <a
-                        href="<c:url value='?action=Food&command=show' />">食品登録</a>&nbsp;
-                          <a
-                        href="<c:url value='?action=Auth&command=logout' />">ログアウト</a>&nbsp;
-                    </c:if>
+                    <div class="header_menu">
+                        <a href="<c:url value='?action=User&command=show' />">▶ プロフィール</a>
+                    </div>
+                    <div class="header_menu">
+                        <a href="<c:url value='?action=Food&command=show' />">▶ 食品登録</a>
+                    </div>
+                    <div class="header_menu">
+                        <a href="<c:url value='?action=Record&command=show' />">▶ 記録一覧</a>
+                    </div>
+                    <div class="header_menu">
+                        <a href="<c:url value='?action=Auth&command=logout' />">▶ ログアウト</a>
+                    </div>
+                </c:if>
             </div>
         </div>
+
 
         <!-- メッセージ表示 -->
         <c:if test="${flush != null}">
