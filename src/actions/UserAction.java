@@ -34,12 +34,36 @@ public class UserAction extends ActionBase {
                 request.getParameter("period"),
                 request.getParameter("targetProtein"), request.getParameter("targetFat"),
                 request.getParameter("targetCarbo"), request.getParameter("password"));
+
         //パスワード再入力チェック
         if (!request.getParameter("password").equals(request.getParameter("passwordCheck"))) {
             errors.add("パスワードの再入力に誤りがあります");
         }
 
         if (errors.size() > 0) {
+            String name = request.getParameter("name");
+            String age = request.getParameter("age");
+            String sex = request.getParameter("sex");
+            String height = request.getParameter("height");
+            String weight = request.getParameter("weight");
+            String bodyFat = request.getParameter("bodyFat");
+            String targetWeight = request.getParameter("targetWeight");
+            String period = request.getParameter("period");
+            String targetProtein = request.getParameter("targetProtein");
+            String targetFat = request.getParameter("targetFat");
+            String targetCarbo = request.getParameter("targetCarbo");
+
+            request.setAttribute("name",name);
+            request.setAttribute("age",age);
+            request.setAttribute("sex",sex);
+            request.setAttribute("height",height);
+            request.setAttribute("weight",weight);
+            request.setAttribute("bodyFat",bodyFat);
+            request.setAttribute("targetWeight",targetWeight);
+            request.setAttribute("period",period);
+            request.setAttribute("targetProtein",targetProtein);
+            request.setAttribute("targetFat",targetFat);
+            request.setAttribute("targetCarbo",targetCarbo);
             request.setAttribute("errors", errors);
             forward("users/new");
         } else {

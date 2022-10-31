@@ -45,7 +45,7 @@
                     <p>
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalCalorie }" />
-                        kcal 【
+                        kcal 　　　　　【
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalCalorie - recommendCalorie}" />
                         kcal 】
@@ -54,7 +54,7 @@
                         タンパク質
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalProtein }" />
-                        g 【
+                        g 　【
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalProtein - recommendProtein }" />
                         g 】
@@ -63,7 +63,7 @@
                         脂質
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalFat }" />
-                        g 【
+                        g 　　　　【
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalFat - recommendFat}" />
                         g 】
@@ -72,7 +72,7 @@
                         糖質
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalCarbo }" />
-                        g 【
+                        g 　　　　【
                         <fmt:formatNumber type="number" maxFractionDigits="2"
                             value="${dailyTotal.totalCarbo - recommendCarbo }" />
                         g 】
